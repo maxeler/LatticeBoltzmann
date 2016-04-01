@@ -1,0 +1,112 @@
+Fri 11:34: ########################################## 
+Fri 11:34: Compiling.
+Fri 11:34: ########################################## 
+
+Fri 11:34: MaxCompiler version: 2015.2.
+Fri 11:34: Build Simulation run rule for LBProject start time: Fri Apr 01 11:34:50 BST 2016.
+Fri 11:34: Project location: /home/dpackwood/apps/lbapp/lbproject/APP.
+Fri 11:34: Detailed build log: /home/dpackwood/apps/lbapp/lbproject/APP/RunRules/Simulation/build.log.
+
+Fri 11:34: Compiling Engine Code.
+Fri 11:34: Engine building skipped (no changes on .max files).
+Fri 11:34: Compiling CPU Code.
+Fri 11:34: Run CPU project make files updating
+Fri 11:34: Executing command:
+Fri 11:34: java -jar /network-raid/opt/maxcompiler-2015.2/lib/MaxIDE/projectAdmin.jar -u /home/dpackwood/apps/lbapp/lbproject/APP Simulation 
+Fri 11:34: Command output:
+
+Fri 11:34: MaxCompiler Project Admin Tool Version 2015.2.00001
+
+Fri 11:34:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+Fri 11:34: Handler version 2
+Fri 11:34: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Fri 11:34: 	Updating: Simulation
+Fri 11:34: Found makefiles: 1
+Fri 11:34: 	Updated: Simulation
+Fri 11:34: Run CPU make.
+Fri 11:34: make RUNRULE=Simulation 
+Fri 11:34: Command output:
+Fri 11:34: make -f Makefile.rules build
+Fri 11:34: make[1]: Entering directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Fri 11:34: set -e; rm -f ../RunRules/Simulation/objects/cpp/LBProjectInterface.d ;                                                               \
+Fri 11:34: 	  g++ -M -Wall -Wextra -g -O3 -I../RunRules/Simulation/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -Wno-error LBProjectInterface.cpp > ../RunRules/Simulation/objects/cpp/LBProjectInterface.d.$$ ;                                \
+Fri 11:34:       sed 's,\(LBProjectInterface\)\.o[ :]*,../RunRules/Simulation/objects/cpp/\1.o ../RunRules/Simulation/objects/cpp/LBProjectInterface.d : ,g' < ../RunRules/Simulation/objects/cpp/LBProjectInterface.d.$$ > ../RunRules/Simulation/objects/cpp/LBProjectInterface.d; \
+Fri 11:34:       rm -f ../RunRules/Simulation/objects/cpp/LBProjectInterface.d.$$
+Fri 11:34: set -e; rm -f ../RunRules/Simulation/objects/c/LBProjectCpuCode.d ;                                                             \
+Fri 11:34: 	  g++ -M -Wall -Wextra -g -O3 -I../RunRules/Simulation/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -Wno-error LBProjectCpuCode.c > ../RunRules/Simulation/objects/c/LBProjectCpuCode.d.$$ ;                                 \
+Fri 11:34:       sed 's,\(LBProjectCpuCode\)\.o[ :]*,../RunRules/Simulation/objects/c/\1.o ../RunRules/Simulation/objects/c/LBProjectCpuCode.d : ,g' < ../RunRules/Simulation/objects/c/LBProjectCpuCode.d.$$ > ../RunRules/Simulation/objects/c/LBProjectCpuCode.d; \
+Fri 11:34:       rm -f ../RunRules/Simulation/objects/c/LBProjectCpuCode.d.$$
+Fri 11:34: make[1]: Leaving directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Fri 11:34: make[1]: Entering directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Fri 11:34: g++ -Wall -Wextra -g -O3 -I../RunRules/Simulation/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -c LBProjectCpuCode.c -o ../RunRules/Simulation/objects/c/LBProjectCpuCode.o
+Fri 11:34: g++ -Wall -Wextra -g -O3 -I../RunRules/Simulation/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -c LBProjectInterface.cpp -o ../RunRules/Simulation/objects/cpp/LBProjectInterface.o
+Fri 11:34: LBProjectInterface.cpp:10: warning: unused parameter ‘Re’
+Fri 11:34: g++ -Wall -Wextra -g -O3 -I../RunRules/Simulation/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -o ../RunRules/Simulation/binaries/LBProject ../RunRules/Simulation/objects/maxfiles/slic_LBProject.o ../RunRules/Simulation/objects/c/LBProjectCpuCode.o ../RunRules/Simulation/objects/cpp/LBProjectInterface.o -g -O3  -L '/network-raid/opt/maxcompiler-2015.2/lib' -lslic -L '/network-raid/opt/maxeleros-2015.2/maxeleros/lib' -lmaxeleros -lpthread -lm -lrt 
+Fri 11:34: make[1]: Leaving directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Fri 11:34: Build completed: Fri Apr 01 11:34:52 BST 2016
+
+
+Fri 11:34: ########################################## 
+Fri 11:34: Running
+Fri 11:34: ########################################## 
+Fri 11:34: Executing command:
+Fri 11:34: '/home/dpackwood/apps/lbapp/lbproject/APP/RunRules/Simulation/binaries/LBProject' 
+Fri 11:34: Command output:
+Fri 11:34: Determined an lmem size of 180096 bytes
+Fri 11:34: Iteration: 0,0
+Fri 11:34: Iteration: 0,1
+Fri 11:34: Iteration: 0,2
+Fri 11:34: Iteration: 0,3
+Fri 11:34: Iteration: 0,4
+Fri 11:34: Iteration: 0,5
+Fri 11:34: Iteration: 0,6
+Fri 11:34: Iteration: 0,7
+Fri 11:34: Iteration: 0,8
+Fri 11:34: Iteration: 0,9
+Fri 11:34: Writing to file: output/LB0.dat
+Fri 11:34: Iteration: 1,0
+Fri 11:34: Iteration: 1,1
+Fri 11:34: Iteration: 1,2
+Fri 11:34: Iteration: 1,3
+Fri 11:34: Iteration: 1,4
+Fri 11:34: Iteration: 1,5
+Fri 11:34: Iteration: 1,6
+Fri 11:34: Iteration: 1,7
+Fri 11:34: Iteration: 1,8
+Fri 11:34: Iteration: 1,9
+Fri 11:34: Writing to file: output/LB1.dat
+Fri 11:34: Iteration: 2,0
+Fri 11:34: Iteration: 2,1
+Fri 11:34: Iteration: 2,2
+Fri 11:34: Iteration: 2,3
+Fri 11:34: Iteration: 2,4
+Fri 11:34: Iteration: 2,5
+Fri 11:34: Iteration: 2,6
+Fri 11:34: Iteration: 2,7
+Fri 11:34: Iteration: 2,8
+Fri 11:34: Iteration: 2,9
+Fri 11:34: Writing to file: output/LB2.dat
+Fri 11:34: Iteration: 3,0
+Fri 11:34: Iteration: 3,1
+Fri 11:34: Iteration: 3,2
+Fri 11:34: Iteration: 3,3
+Fri 11:34: Iteration: 3,4
+Fri 11:34: Iteration: 3,5
+Fri 11:34: Iteration: 3,6
+Fri 11:34: Iteration: 3,7
+Fri 11:34: Iteration: 3,8
+Fri 11:34: Iteration: 3,9
+Fri 11:34: Writing to file: output/LB3.dat
+Fri 11:34: Iteration: 4,0
+Fri 11:34: Iteration: 4,1
+Fri 11:34: Iteration: 4,2
+Fri 11:34: Iteration: 4,3
+Fri 11:34: Iteration: 4,4
+Fri 11:34: Iteration: 4,5
+Fri 11:34: Iteration: 4,6
+Fri 11:34: Iteration: 4,7
+Fri 11:34: Iteration: 4,8
+Fri 11:34: Iteration: 4,9
+Fri 11:34: Writing to file: output/LB4.dat
+Fri 11:34: Done.
+Fri 11:34: Process terminated with exit code 0.

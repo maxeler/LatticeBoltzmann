@@ -1,0 +1,43 @@
+
+package lbproject;
+
+import com.maxeler.maxcompiler.v2.managers.BuildConfig;
+import com.maxeler.maxcompiler.v2.managers.custom.CustomManager;
+import com.maxeler.maxcompiler.v2.managers.custom.blocks.KernelBlock;
+import com.maxeler.maxcompiler.v2.managers.custom.stdlib.LMemCommandGroup;
+import com.maxeler.maxcompiler.v2.managers.custom.stdlib.LMemInterface;
+
+public class LBProjectManager extends CustomManager {
+
+	private static final String s_kernelName = "LBProjectKernel";
+
+	public LBProjectManager(LBProjectEngineParameters engineParameters) {
+		super(engineParameters);
+
+		KernelBlock block = addKernel(new LBProjectKernel(makeKernelParameters(s_kernelName)));
+
+		LMemInterface lmemInterface = addLMemInterface();
+
+		lmemInterface.addStreamToLMem("setup_lmem", LMemCommandGroup.MemoryAccessPattern.LINEAR_1D) <== addStreamFromCPU("setup_cpu");
+
+		block.getInput("f") <== lmemInterface.addStreamFromLMem("f_lmem", LMemCommandGroup.MemoryAccessPattern.LINEAR_1D);
+		lmemInterface.addStreamToLMem("g_lmem", LMemCommandGroup.MemoryAccessPattern.LINEAR_1D) <== block.getOutput("g");
+
+		addStreamToCPU("read_cpu") <== lmemInterface.addStreamFromLMem("read_lmem", LMemCommandGroup.MemoryAccessPattern.LINEAR_1D);
+
+		configBuild(engineParameters);
+	}
+
+	private void configBuild(LBProjectEngineParameters params) {
+		BuildConfig buildConfig = getBuildConfig();
+		buildConfig.setMPPRCostTableSearchRange(params.getMPPRStartCT(), params.getMPPREndCT());
+		buildConfig.setMPPRParallelism(params.getMPPRThreads());
+		buildConfig.setMPPRRetryNearMissesThreshold(params.getMPPRRetryThreshold());
+	}
+
+	public static void main(String[] args) {
+		LBProjectManager manager = new LBProjectManager(new LBProjectEngineParameters(args));
+		manager.build();
+	}
+}
+

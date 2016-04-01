@@ -1,0 +1,159 @@
+package lbproject;
+
+import maxpower.kernel.io.AspectChangeIO;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEType;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVector;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorType;
+
+class LBProjectKernel extends Kernel {
+
+	private static final DFEType ftype = dfeFloat(11,53);
+	private final DFEVectorType<DFEVar> mvecstype;
+	private final DFEVectorType<DFEVar> fpopstype;
+
+	protected LBProjectKernel(KernelParameters parameters) {
+		super(parameters);
+
+		mvecstype = new DFEVectorType<DFEVar>(ftype,4);
+		fpopstype = new DFEVectorType<DFEVar>(ftype,9);
+
+		DFEVar dim = io.scalarInput("dim",dfeUInt(32));
+		int offX = 1;
+		OffsetExpr offY = stream.makeOffsetParam("dimoff",50,500);
+		DFEVar omega = io.scalarInput("omega",ftype);
+
+		AspectChangeIO acio = new AspectChangeIO(this, 1536);
+		DFEVector<DFEVar> fs  = acio.input("f", fpopstype);
+
+		CounterChain chain = control.count.makeCounterChain();
+		DFEVar Y = chain.addCounter(dim,1);
+		DFEVar X = chain.addCounter(dim,1);
+		DFEVar doFlush = (X === dim - 1) & (Y === dim - 1);
+
+		final double u = 0.1f;
+		final double u2 = u*u;
+		final double f4 = (1.0/9.0)* (1.0 - 3.0*u2/2.0);
+		final double f7 = (1.0/36.0)*(1.0 - 3.0*u + 9.0*u2/2.0 - 3.0*u2/2.0);
+		final double f8 = (1.0/36.0)*(1.0 + 3.0*u + 9.0*u2/2.0 - 3.0*u2/2.0);
+
+		DFEVar feq4 = constant.var(f4);
+		DFEVar feq7 = constant.var(f7);
+		DFEVar feq8 = constant.var(f8);
+		DFEVar fden = constant.var(1.0/(f4+f7+f8));
+
+		DFEVar oneMOmegaOFour = (1.0-omega)*0.25;
+
+
+		DFEVector<DFEVar> M = calcM(fs);
+		DFEVector<DFEVar> feq = calcEQ(M);
+
+		double [] wg = {4.0/9.0, -2.0/9.0, -2.0/9.0, -2.0/9.0, -2.0/9.0, 4.0/36.0, 4.0/36.0, 4.0/36.0, 4.0/36.0};
+
+
+		DFEVector<DFEVar> fps = fpopstype.newInstance(this);
+		for (int j = 0; j < 9; j++){
+			fps[j] <== fs[j] + omega*(feq[j]-fs[j]) - oneMOmegaOFour*wg[j]*M[3];
+		}
+
+		DFEVar gamma = (fps[2] + fps[5] + fps[6])*fden;
+
+		DFEVar cornerUL = (X===0       & Y===(dim-1));
+		DFEVar cornerBL = (X===0       & Y===0      );
+		DFEVar cornerUR = (X===(dim-1) & Y===(dim-1));
+		DFEVar cornerBR = (X===(dim-1) & Y===0      );
+
+		DFEVar wallU = (Y===(dim-1) & ~cornerUL & ~cornerUR);
+		DFEVar wallL = (X===0       & ~cornerUL & ~cornerBL);
+		DFEVar wallR = (X===(dim-1) & ~cornerUR & ~cornerUR);
+		DFEVar wallB = (Y===0       & ~cornerBL & ~cornerBR);
+
+		DFEVar boundaryControl = dfeUInt(4).newInstance(this);
+		boundaryControl <== constant.var(0).cast(dfeUInt(4));
+
+		boundaryControl = (wallL? constant.var(1).cast(dfeUInt(4)):boundaryControl);
+		boundaryControl = (wallR? constant.var(2).cast(dfeUInt(4)):boundaryControl);
+		boundaryControl = (wallB? constant.var(3).cast(dfeUInt(4)):boundaryControl);
+		boundaryControl = (wallU? constant.var(4).cast(dfeUInt(4)):boundaryControl);
+
+		boundaryControl = (cornerUL? constant.var(5).cast(dfeUInt(4)):boundaryControl);
+		boundaryControl = (cornerBL? constant.var(6).cast(dfeUInt(4)):boundaryControl);
+		boundaryControl = (cornerUR? constant.var(7).cast(dfeUInt(4)):boundaryControl);
+		boundaryControl = (cornerBR? constant.var(8).cast(dfeUInt(4)):boundaryControl);
+
+		DFEVector<DFEVar> gs  = fpopstype.newInstance(this);
+		gs[0] <== fps[0];
+		//                                        bulk,                                       wallL,                                      wallR,                                      wallB,                                      wallU,                                      cUL,                                        cBL,                                        cUR,                                        cBR
+		gs[1] <== control.mux(boundaryControl, stream.offset(fps,-offX)[1],      fps[3],                                  stream.offset(fps,-offX)[1],      stream.offset(fps,-offX)[1],      stream.offset(fps,-offX)[1],      fps[3],                                  fps[3],                                  stream.offset(fps,-offX)[1],      stream.offset(fps,-offX)[1]);
+		gs[2] <== control.mux(boundaryControl, stream.offset(fps,-offY)[2],      stream.offset(fps,-offY)[2],      stream.offset(fps,-offY)[2],      fps[4],                                  stream.offset(fps,-offY)[2],      stream.offset(fps,-offY)[2],      fps[4],                                  stream.offset(fps,-offY)[2],      fps[4]                            );
+		gs[3] <== control.mux(boundaryControl, stream.offset(fps, offX)[3],      stream.offset(fps, offX)[3],      fps[1],                                  stream.offset(fps, offX)[3],      stream.offset(fps, offX)[3],      stream.offset(fps, offX)[3],      stream.offset(fps, offX)[3],      fps[1],                                  fps[1]                            );
+		gs[4] <== control.mux(boundaryControl, stream.offset(fps, offY)[4],      stream.offset(fps, offY)[4],      stream.offset(fps, offY)[4],      stream.offset(fps, offY)[4],      gamma*feq4,                                 fps[2],                                  stream.offset(fps, offY)[4],      fps[2],                                  stream.offset(fps, offY)[4]);
+
+		gs[5] <== control.mux(boundaryControl, stream.offset(fps,-offX-offY)[5], fps[7],                                  stream.offset(fps,-offX-offY)[5], fps[7],                                  stream.offset(fps,-offX-offY)[5], fps[7],                                  fps[7],                                  stream.offset(fps,-offX-offY)[5], fps[7]                                 );
+		gs[6] <== control.mux(boundaryControl, stream.offset(fps, offX-offY)[6], stream.offset(fps, offX-offY)[6], fps[8],                                  fps[8],                                  stream.offset(fps, offX-offY)[6], stream.offset(fps, offX-offY)[6], fps[8],                                  fps[8],                                  fps[8]                                 );
+		gs[7] <== control.mux(boundaryControl, stream.offset(fps, offX+offY)[7], stream.offset(fps, offX+offY)[7], fps[5],                                  stream.offset(fps, offX+offY)[7], gamma*feq7,                                 fps[5],                                  stream.offset(fps, offX+offY)[7], fps[5],                                  fps[5]                                 );
+		gs[8] <== control.mux(boundaryControl, stream.offset(fps,-offX+offY)[8], fps[6],                                  stream.offset(fps,-offX+offY)[8], stream.offset(fps,-offX+offY)[8], gamma*feq8,                                 fps[6],                                  fps[6],                                  fps[6],                                  stream.offset(fps,-offX+offY)[8]);
+
+		acio.output("g", gs, constant.var(true), doFlush);
+	}
+
+	protected DFEVector<DFEVar> calcM(DFEVector<DFEVar> f){
+
+		DFEVector<DFEVar> M = mvecstype.newInstance(this);
+
+		DFEVar M1t4 = f[1] + f[2] + f[3] + f[4];
+		DFEVar M5t8 = f[5] + f[6] + f[7] + f[8];
+
+		M[0] <== f[0] + M1t4 + M5t8;
+
+		DFEVar Minv = 1.0/M[0];
+		M[1] <== (f[1] - f[3] + f[5] - f[6] - f[7] + f[8])*Minv;
+		M[2] <== (f[2] - f[4] + f[5] + f[6] - f[7] - f[8])*Minv;
+
+		M[3] <== (f[0] - 2.0*M1t4 + 4.0*M5t8);
+
+		return M;
+	}
+
+	protected DFEVector<DFEVar> calcEQ(DFEVector<DFEVar> M){
+
+
+		DFEVector<DFEVar> feq = fpopstype.newInstance(this);
+
+		DFEVar ux2 = M[1]*M[1];
+		DFEVar uy2 = M[2]*M[2];
+		DFEVar uxy = M[1]*M[2];
+		DFEVar u2 = ux2 + uy2;
+
+		DFEVar tM1 = 3.0*M[1];
+		DFEVar tM2 = 3.0*M[2];
+		DFEVar nM12 = 4.5*ux2;
+		DFEVar nM22 = 4.5*uy2;
+		DFEVar nMs = 9.0*uxy;
+		DFEVar gen = 1.0 - 1.5*u2;
+
+		DFEVar M0136 = (1.0/36.0)*M[0];
+		DFEVar M019 = M0136*4.0;
+
+		feq[0] <== (4.0f/9.0f)* M[0]*gen;
+
+		feq[1] <== M019*(gen + tM1       + nM12       );
+		feq[2] <== M019*(gen       + tM2        + nM22);
+		feq[3] <== M019*(gen - tM1       + nM12       );
+		feq[4] <== M019*(gen       - tM2        + nM22);
+
+		DFEVar gen2 = gen + nM12 + nM22;
+
+		feq[5] <== M0136*(gen2 + tM1 + tM2 + nMs);
+		feq[6] <== M0136*(gen2 - tM1 + tM2 - nMs);
+		feq[7] <== M0136*(gen2 - tM1 - tM2 + nMs);
+		feq[8] <== M0136*(gen2 + tM1 - tM2 - nMs);
+
+		return feq;
+	}
+}

@@ -1,0 +1,1 @@
+ffmpeg -r 25 -i LB%d.datstream.png -vb 20M LB.avi
