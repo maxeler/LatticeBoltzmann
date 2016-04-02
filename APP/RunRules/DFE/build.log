@@ -1,121 +1,46 @@
-Fri 14:23: ########################################## 
-Fri 14:23: Compiling.
-Fri 14:23: ########################################## 
+Sat 00:58: ########################################## 
+Sat 00:58: Compiling.
+Sat 00:58: ########################################## 
 
-Fri 14:23: MaxCompiler version: 2015.2.
-Fri 14:23: Build DFE run rule for LBProject start time: Fri Apr 01 14:23:33 BST 2016.
-Fri 14:23: Project location: /home/dpackwood/apps/lbapp/lbproject/APP.
-Fri 14:23: Detailed build log: /home/dpackwood/apps/lbapp/lbproject/APP/RunRules/DFE/build.log.
+Sat 00:58: MaxCompiler version: 2015.2.
+Sat 00:58: Build DFE run rule for LBProject start time: Sat Apr 02 00:58:48 BST 2016.
+Sat 00:58: Project location: /home/dpackwood/apps/lbapp/lbproject/APP.
+Sat 00:58: Detailed build log: /home/dpackwood/apps/lbapp/lbproject/APP/RunRules/DFE/build.log.
 
-Fri 14:23: Compiling Engine Code.
-Fri 14:23: Building LBProject.max file. 
-Fri 14:23: Setting environment variable:
-Fri 14:23: MAXCOMPILER_BUILD_DIR : /network-scratch/dpackwood/maxdc_builds/
-Fri 14:23: MAX_BUILDPARAMS : DFEModel='MAIA' target='DFE' maxFileName='LBProject'  
-Fri 14:23: Building output:
-Fri 14:23: MaxCompiler version: 2015.2
-Fri 14:23: Build "LBProject" start time: Fri Apr 01 14:23:38 BST 2016
-Fri 14:23: Main build process running as user dpackwood on host workstation016
-Fri 14:23: Build location: /scratch/dpackwood/maxdc_builds/01-04-16/LBProject_MAIA_DFE
-Fri 14:23: Detailed build log available in "_build.log"
-Fri 14:23: 
-Fri 14:23: ENGINE BUILD PARAMETERS
-Fri 14:23: 	 Build name: LBProject_MAIA_DFE
-Fri 14:23: 	   DFEModel: MAIA              
-Fri 14:23: 	maxFileName: LBProject         
-Fri 14:23: 	     target: DFE               
-Fri 14:23: 	 enableMPCX: false             
-Fri 14:23: Instantiating kernel "LBProjectKernel"
-Fri 14:23: 
-Fri 14:23: Compiling kernel "LBProjectKernel"
-Fri 14:23: WARNING: Warning (UNCONNECTED_DESIGN_ELEMENT):
-Fri 14:23: WARNING: Unconnected elements in design 'LBProjectKernel'
-Fri 14:23: WARNING: details in : /scratch/dpackwood/maxdc_builds/01-04-16/LBProject_MAIA_DFE/scratch/LBProjectKernel_graph_warnings.txt
-Fri 14:24: Generating input files (VHDL, netlists, MegaWizard/CoreGen)
-Fri 14:24: Running back-end  build (16 phases)
-Fri 14:24: (1/16) - Prepare MaxFile Data (GenerateMaxFileDataFile)
-Fri 14:24: (2/16) - Prepare for Placement (QuartusMap)
-Fri 14:58: (3/16) - Generate Incremental Netlist (QuartusCdb)
-Fri 15:02: (4/16) - Generate Resource Report (AlteraResourceUsageBuildPass)
-Fri 15:02: (5/16) - Generate Annotated Source Code (AlteraResourceAnnotationBuildPass)
-Fri 15:03: (6/16) - Analyse Resource Usage (AlteraResourceCounterPass)
-Fri 15:03: 
-Fri 15:03: About to start chip vendor Map/Place/Route toolflow. This will take some time.
-Fri 15:03: For this compile, we estimate this process may take longer than 1 hour.
-Fri 15:03: We recommend running in simulation to verify correctness before building hardware.
-Fri 15:03: 
-Fri 15:03: PRELIMINARY RESOURCE USAGE
-Fri 15:03: Logic utilization:     153732 / 262400   (58.59%)
-Fri 15:03: Multipliers (18x18):      424 / 3926     (10.80%)
-Fri 15:03: Block memory (bits):  6150212 / 52572160 (11.70%)
-Fri 15:03: 
-Fri 15:03: (7/16) - Place and Route DFE (AlteraMPPR)
-Fri 15:03: Executing MPPR with 1 cost table and 1 thread.
-Fri 15:03: MPPR: Starting 1 cost table
-Fri 17:52: MPPR: Cost table 1 met timing with score 0 (best score 0)
-Fri 17:52: (8/16) - Generate Configuration (QuartusAsm)
-Fri 17:57: (9/16) - Convert Programming File (QuartusCpf)
-Fri 17:58: (10/16) - Update Checksum (UpdateChecksumBuildPass)
-Fri 17:58: (11/16) - Generate Incremental Netlist (QuartusCdb)
-Fri 18:01: (12/16) - Generate Configuration (QuartusAsm)
-Fri 18:06: (13/16) - Convert Programming File (QuartusCpf)
-Fri 18:06: (14/16) - Generate Resource Report (AlteraResourceUsageBuildPass)
-Fri 18:07: (15/16) - Generate Annotated Source Code (AlteraResourceAnnotationBuildPass)
-Fri 18:08: (16/16) - Generate MaxFile (GenerateMaxFileAltera)
-Fri 18:08: 
-Fri 18:08: FINAL RESOURCE USAGE
-Fri 18:08: Logic utilization:   133611 / 262400 (50.92%)
-Fri 18:08:   Primary FFs:       244115 / 524800 (46.52%)
-Fri 18:08:   Secondary FFs:      10899 / 524800 (2.08%)
-Fri 18:08: Multipliers (18x18):    424 / 3926   (10.80%)
-Fri 18:08:   DSP blocks:           212 / 1963   (10.80%)
-Fri 18:08: Block memory (M20K):    817 / 2567   (31.83%)
-Fri 18:08: 
-Fri 18:08: MaxFile: /scratch/dpackwood/maxdc_builds/01-04-16/LBProject_MAIA_DFE/results/LBProject.max (MD5Sum: cd88eab5521ba81f2227e6d68ff92364)
-Fri 18:08: Build completed: Fri Apr 01 18:08:08 BST 2016 (took 3 hours, 44 mins, 29 secs)
-Fri 18:08: Executing command:
-Fri 18:08: cp /home/dpackwood/apps/lbapp/lbproject/APP/RunRules/DFE/maxfiles/LBProject.h /home/dpackwood/apps/lbapp/lbproject/APP/RunRules/DFE/include/LBProject.h 
-Fri 18:08: Command output:
-Fri 18:08: Building: LBProject.max file finished.
-Fri 18:08: Engine build finished.
-Fri 18:08: Compiling CPU Code.
-Fri 18:08: Run CPU project make files updating
-Fri 18:08: Executing command:
-Fri 18:08: java -jar /network-raid/opt/maxcompiler-2015.2/lib/MaxIDE/projectAdmin.jar -u /home/dpackwood/apps/lbapp/lbproject/APP DFE 
-Fri 18:08: Command output:
+Sat 00:58: Compiling Engine Code.
+Sat 00:58: Engine building skipped (no changes on .max files).
+Sat 00:58: Compiling CPU Code.
+Sat 00:58: Run CPU project make files updating
+Sat 00:58: Executing command:
+Sat 00:58: java -jar /network-raid/opt/maxcompiler-2015.2/lib/MaxIDE/projectAdmin.jar -u /home/dpackwood/apps/lbapp/lbproject/APP DFE 
+Sat 00:58: Command output:
 
-Fri 18:08: MaxCompiler Project Admin Tool Version 2015.2.00001
-Fri 18:08:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
-Fri 18:08: Handler version 2
-Fri 18:08: Updating RunRule dependent Makefiles for RunRule 'DFE'
-Fri 18:08: 	Updating: DFE
-Fri 18:08: Found makefiles: 1
-Fri 18:08: 	Updated: DFE
-Fri 18:08: Run CPU make.
-Fri 18:08: make RUNRULE=DFE 
-Fri 18:08: Command output:
-Fri 18:08: make -f Makefile.rules build
-Fri 18:08: make[1]: Entering directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
-Fri 18:08: set -e; rm -f ../RunRules/DFE/objects/cpp/LBProjectInterface.d ;                                                               \
-Fri 18:08: 	  g++ -M -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -Wno-error LBProjectInterface.cpp > ../RunRules/DFE/objects/cpp/LBProjectInterface.d.$$ ;                                \
-Fri 18:08:       sed 's,\(LBProjectInterface\)\.o[ :]*,../RunRules/DFE/objects/cpp/\1.o ../RunRules/DFE/objects/cpp/LBProjectInterface.d : ,g' < ../RunRules/DFE/objects/cpp/LBProjectInterface.d.$$ > ../RunRules/DFE/objects/cpp/LBProjectInterface.d; \
-Fri 18:08:       rm -f ../RunRules/DFE/objects/cpp/LBProjectInterface.d.$$
-Fri 18:08: set -e; rm -f ../RunRules/DFE/objects/c/LBProjectCpuCode.d ;                                                             \
-Fri 18:08: 	  g++ -M -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -Wno-error LBProjectCpuCode.c > ../RunRules/DFE/objects/c/LBProjectCpuCode.d.$$ ;                                 \
-Fri 18:08:       sed 's,\(LBProjectCpuCode\)\.o[ :]*,../RunRules/DFE/objects/c/\1.o ../RunRules/DFE/objects/c/LBProjectCpuCode.d : ,g' < ../RunRules/DFE/objects/c/LBProjectCpuCode.d.$$ > ../RunRules/DFE/objects/c/LBProjectCpuCode.d; \
-Fri 18:08:       rm -f ../RunRules/DFE/objects/c/LBProjectCpuCode.d.$$
-Fri 18:08: make[1]: Leaving directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
-Fri 18:08: make[1]: Entering directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
-Fri 18:08: "/network-raid/opt/maxcompiler-2015.2/bin/sliccompile" ../RunRules/DFE/maxfiles/LBProject.max ../RunRules/DFE/objects/maxfiles/slic_LBProject.o
-Fri 18:08: Processing maxfile for MAIA from '../RunRules/DFE/maxfiles/LBProject.max'.
-Fri 18:08: /network-raid/opt/maxcompiler-2015.2/lib/clang/bin/start.sh clang -fgnu89-inline -pipe -O0 -std=gnu99 -Wall -Werror -frandom-seed=foo -Wno-unused-variable -Wno-unused-function -fPIC -I /network-raid/opt/maxcompiler-2015.2/include/slic -DMAXFILE_INC="/dev/null" -DSLIC_NO_DESTRUCTORS -c /tmp/sliccompile_6200566635545448174/cobject/max_8954320570819348065.c -o /tmp/sliccompile_6200566635545448174/cobject/max_8954320570819348065.c.o 
-Fri 18:08: /network-raid/opt/maxcompiler-2015.2/lib/clang/bin/start.sh clang -fgnu89-inline -pipe -O0 -std=gnu99 -Wall -Werror -frandom-seed=foo -Wno-unused-variable -Wno-unused-function -fPIC -I /network-raid/opt/maxcompiler-2015.2/include/slic -DMAXFILE_INC="/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode/../RunRules/DFE/maxfiles/LBProject.max" -DSLIC_NO_DESTRUCTORS -c /network-raid/opt/maxcompiler-2015.2/src/slicinterface/MaxFileInit.c -o max_5541346043819127705.o 
-Fri 18:08: ld -r /tmp/sliccompile_6200566635545448174/cobject/max_8954320570819348065.c.o max_5541346043819127705.o -o slic_LBProject.o 
-Fri 18:08: Copying .max file C object into '/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode/../RunRules/DFE/objects/maxfiles'
-Fri 18:08: g++ -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -c LBProjectCpuCode.c -o ../RunRules/DFE/objects/c/LBProjectCpuCode.o
-Fri 18:08: g++ -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -c LBProjectInterface.cpp -o ../RunRules/DFE/objects/cpp/LBProjectInterface.o
-Fri 18:08: g++ -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -o ../RunRules/DFE/binaries/LBProject ../RunRules/DFE/objects/maxfiles/slic_LBProject.o ../RunRules/DFE/objects/c/LBProjectCpuCode.o ../RunRules/DFE/objects/cpp/LBProjectInterface.o -g -O3  -L '/network-raid/opt/maxcompiler-2015.2/lib' -lslic -L '/network-raid/opt/maxeleros-2015.2/maxeleros/lib' -lmaxeleros -lpthread -lm -lrt 
-Fri 18:08: make[1]: Leaving directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
-Fri 18:08: Build completed: Fri Apr 01 18:08:24 BST 2016
+Sat 00:58: MaxCompiler Project Admin Tool Version 2015.2.00001
+Sat 00:58:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+Sat 00:58: Handler version 2
+Sat 00:58: Updating RunRule dependent Makefiles for RunRule 'DFE'
+Sat 00:58: 	Updating: DFE
+Sat 00:58: Found makefiles: 1
+Sat 00:58: 	Updated: DFE
+Sat 00:58: Run CPU make.
+Sat 00:58: make RUNRULE=DFE 
+Sat 00:58: Command output:
+Sat 00:58: make -f Makefile.rules build
+Sat 00:58: make[1]: Entering directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Sat 00:58: set -e; rm -f ../RunRules/DFE/objects/cpp/LBProjectInterface.d ;                                                               \
+Sat 00:58: 	  g++ -M -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -Wno-error LBProjectInterface.cpp > ../RunRules/DFE/objects/cpp/LBProjectInterface.d.$$ ;                                \
+Sat 00:58:       sed 's,\(LBProjectInterface\)\.o[ :]*,../RunRules/DFE/objects/cpp/\1.o ../RunRules/DFE/objects/cpp/LBProjectInterface.d : ,g' < ../RunRules/DFE/objects/cpp/LBProjectInterface.d.$$ > ../RunRules/DFE/objects/cpp/LBProjectInterface.d; \
+Sat 00:58:       rm -f ../RunRules/DFE/objects/cpp/LBProjectInterface.d.$$
+Sat 00:58: set -e; rm -f ../RunRules/DFE/objects/c/LBProjectCpuCode.d ;                                                             \
+Sat 00:58: 	  g++ -M -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -Wno-error LBProjectCpuCode.c > ../RunRules/DFE/objects/c/LBProjectCpuCode.d.$$ ;                                 \
+Sat 00:58:       sed 's,\(LBProjectCpuCode\)\.o[ :]*,../RunRules/DFE/objects/c/\1.o ../RunRules/DFE/objects/c/LBProjectCpuCode.d : ,g' < ../RunRules/DFE/objects/c/LBProjectCpuCode.d.$$ > ../RunRules/DFE/objects/c/LBProjectCpuCode.d; \
+Sat 00:58:       rm -f ../RunRules/DFE/objects/c/LBProjectCpuCode.d.$$
+Sat 00:58: make[1]: Leaving directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Sat 00:58: make[1]: Entering directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Sat 00:58: g++ -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -c LBProjectCpuCode.c -o ../RunRules/DFE/objects/c/LBProjectCpuCode.o
+Sat 00:58: g++ -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -c LBProjectInterface.cpp -o ../RunRules/DFE/objects/cpp/LBProjectInterface.o
+Sat 00:58: g++ -Wall -Wextra -g -O3 -I../RunRules/DFE/include  -I '/network-raid/opt/maxcompiler-2015.2/include/slic'  -o ../RunRules/DFE/binaries/LBProject ../RunRules/DFE/objects/maxfiles/slic_LBProject.o ../RunRules/DFE/objects/c/LBProjectCpuCode.o ../RunRules/DFE/objects/cpp/LBProjectInterface.o -g -O3  -L '/network-raid/opt/maxcompiler-2015.2/lib' -lslic -L '/network-raid/opt/maxeleros-2015.2/maxeleros/lib' -lmaxeleros -lpthread -lm -lrt 
+Sat 00:58: make[1]: Leaving directory `/home/dpackwood/apps/lbapp/lbproject/APP/CPUCode'
+Sat 00:58: Build completed: Sat Apr 02 00:58:50 BST 2016
 
 

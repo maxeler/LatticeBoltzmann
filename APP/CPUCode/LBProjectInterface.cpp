@@ -20,7 +20,8 @@ LBProjectInterface::LBProjectInterface(size_t dim_, double Re) {
 	f = (double *) malloc(fSize);
 	flipper = false;
 	double nu = dim*0.1/Re;
-	omega = 2.0/(2.0*nu/3.0 + 1.0);
+	omega = 2.0/(6.0*nu + 1.0);
+	printf("Viscosity: %g, Relaxation parameter: %g\n",nu, omega);
 }
 
 void LBProjectInterface::runSetup() {

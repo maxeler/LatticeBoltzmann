@@ -20,7 +20,7 @@ private:
 	max_file_t * maxfile;
 	max_engine_t * engine;
 	bool flipper;
-	bool omega;
+	double omega;
 public:
 	LBProjectInterface(size_t, double);
 	void runSetup();

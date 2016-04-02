@@ -11,7 +11,7 @@ int main(void)
 	size_t dim = 150;
 	int T = 1000;
 	int dT = 1000;
-	double Re = 30000;
+	double Re = 15000;
 
 	LBProjectInterface lbInterface = LBProjectInterface(dim, Re);
 	lbInterface.runSetup();
